@@ -4,17 +4,23 @@ import java.util.ArrayList;
 
 public class Hotel {
     ArrayList<Room> rooms = new ArrayList<>();
-    private int totalRooms;
 
     public Hotel(int totalRooms) {
         if (totalRooms < 0) {
             throw new IllegalArgumentException("check the parameter");
         }
-        totalRooms = totalRooms;
+        this.totalRooms = totalRooms;
+    }
+
+    private int totalRooms;
+
+    public ArrayList<Room> getBookedRooms() {
+        return rooms;
+
     }
 
     public int getRooms() {
-        return rooms.size();
+        return totalRooms;
     }
 
     public int getDoubleRooms() {
@@ -22,7 +28,7 @@ public class Hotel {
     }
 
     public int getRoomsOfType(String type) {
-        return (int) rooms.stream().filter(c -> c.getType().equals(type)).count();
+        return rooms.stream().filter(c -> c.getType().equals(type)).toList().size();
     }
 
     public double AveragePrice() {
@@ -38,11 +44,13 @@ public class Hotel {
         if (type == null)
             throw new IllegalArgumentException("type is null");
         double sum = 0;
+        int count = 0;
         for (int i = 0; i < rooms.size(); i++) {
             if (rooms.get(i).getType().equals(type))
                 sum += rooms.get(i).getPricePerNight();
+            count++;
         }
-        return sum / rooms.size();
+        return sum / count;
     }
 
     public void addRoom(Room room) {
