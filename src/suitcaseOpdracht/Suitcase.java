@@ -1,27 +1,24 @@
-import java.lang.reflect.Array;
+package suitcaseOpdracht;
+
 import java.util.ArrayList;
 
 public class Suitcase {
-  /* RULES:
-     four categories tops, bottoms, footwear, dresses - counts as bottom and top, accessories
-    five pieces in the suitcase
-    must have one top,bottom, and shoes
-    maximum 3 pieces of the same category
-   weight of each item must be greater than 0 and smaller than 10
-    total weight must be smaller than 0 */
-    public enum type
-  {
-      top, bottom, footwear, dress, accessory;
-  }
-  private ArrayList<String> items = new ArrayList<>();
-    private ArrayList<type> broughtCategories =new ArrayList<>();
+    private final ArrayList<String> items = new ArrayList<>();
+    private final ArrayList<type> broughtCategories = new ArrayList<>();
+
+    public boolean ableToLeave() {
+        return broughtCategories.stream().filter(c -> c == type.footwear).count() > 3
+                || broughtCategories.stream().filter(c -> c == type.bottom).count() > 3
+                || broughtCategories.stream().filter(c -> c == type.top).count() > 3;
+    }
+
     private int weight;
-    public Suitcase()
-    {
+
+    public Suitcase() {
 
     }
-    public void toevoegenItem(String itemName, type type, double weight)
-    {
+
+    public void toevoegenItem(String itemName, type type, double weight) {
         if (itemName.trim().isEmpty()) {
             throw new IllegalArgumentException("Check the name ");
         }
@@ -66,21 +63,22 @@ public class Suitcase {
             case "sandals":
             case "hats":
             case "sunglasses":
-             return true;
+                return true;
 
-            default: return false;
+            default:
+                return false;
         }
     }
-    public boolean ableToLeave()
-    {
-        if(broughtCategories.stream().filter(c -> c == type.footwear).count()>3
-            || broughtCategories.stream().filter(c -> c == type.bottom).count()>3
-                || broughtCategories.stream().filter(c -> c == type.top).count()>3)
-        {
-            return true;
-        }
-    else
-        return false;
+
+    /* RULES:
+       four categories tops, bottoms, footwear, dresses - counts as bottom and top, accessories
+      five pieces in the suitcase
+      must have one top,bottom, and shoes
+      maximum 3 pieces of the same category
+     weight of each item must be greater than 0 and smaller than 10
+      total weight must be smaller than 0 */
+    public enum type {
+        top, bottom, footwear, dress, accessory
     }
 
 
