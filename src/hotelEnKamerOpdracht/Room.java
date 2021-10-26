@@ -1,7 +1,7 @@
 package hotelEnKamerOpdracht;
 
 public class Room {
-    double pricePerNight;
+   private double pricePerNight;
     private String code;
     private String type;
     private boolean doubleRoom;
