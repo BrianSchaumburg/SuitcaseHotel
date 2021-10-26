@@ -15,8 +15,9 @@ public class HotelTest {
         roomx = new Room("Kamer 1", 150, "classic room", true);
         roomy = new Room("Kamer 1", 150, "classic room", true);
         roomz = new Room("Kamer 1", 150, "suite", true);
-
-
+        hotel.addRoom(roomx);
+        hotel.addRoom(roomy);
+        hotel.addRoom(roomz);
 
     }
 
@@ -43,15 +44,12 @@ public class HotelTest {
 
     @Test
     public void averagePriceOfType() {
-        this.addRoom();
+
         assertEquals(150 * 2 / 2, hotel.AveragePriceOfType("classic room"), 0);
     }
 
     @Test
     public void addRoom() {
-        hotel.addRoom(roomx);
-        hotel.addRoom(roomy);
-        hotel.addRoom(roomz);
         assertEquals(3, hotel.getBookedRooms().size());
     }
 }

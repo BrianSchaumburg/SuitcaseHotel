@@ -1,6 +1,7 @@
 package hotelEnKamerOpdracht;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Hotel {
     ArrayList<Room> rooms = new ArrayList<>();
@@ -31,26 +32,19 @@ public class Hotel {
     }
 
     public double AveragePrice() {
-        double sum = 0;
-        for (int i = 0; i < rooms.size(); i++) {
-            sum += rooms.get(i).getPricePerNight();
-        }
 
-        return sum / rooms.size();
+
+        return rooms.stream().mapToDouble(c -> c.getPricePerNight()).sum() / rooms.size();
     }
 
     public double AveragePriceOfType(String type) {
         if (type == null)
             throw new IllegalArgumentException("type is null");
-        double sum = 0;
-        int count = 0;
-        for (int i = 0; i < rooms.size(); i++) {
-            if (rooms.get(i).getType().equals(type)) {
-                sum += rooms.get(i).getPricePerNight();
-                count++;
-            }
-        }
-        return sum / count;
+
+        List<Room> rooms = this.rooms.stream().filter(c -> c.getType() == type).toList();
+        double averagePrice = rooms.stream().mapToDouble(c -> c.getPricePerNight()).sum();
+
+        return averagePrice / rooms.size();
     }
 
     public void addRoom(Room room) {
