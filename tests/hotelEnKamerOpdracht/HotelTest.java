@@ -15,7 +15,7 @@ public class HotelTest {
         roomx = new Room("Kamer 1", 150, "classic room", true);
         roomy = new Room("Kamer 1", 150, "classic room", true);
         roomz = new Room("Kamer 1", 150, "suite", true);
-        this.addRoom();
+
 
 
     }
@@ -43,6 +43,7 @@ public class HotelTest {
 
     @Test
     public void averagePriceOfType() {
+        this.addRoom();
         assertEquals(150 * 2 / 2, hotel.AveragePriceOfType("classic room"), 0);
     }
 

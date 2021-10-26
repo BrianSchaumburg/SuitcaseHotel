@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Hotel {
     ArrayList<Room> rooms = new ArrayList<>();
+    private final int totalRooms;
 
     public Hotel(int totalRooms) {
         if (totalRooms < 0) {
@@ -11,8 +12,6 @@ public class Hotel {
         }
         this.totalRooms = totalRooms;
     }
-
-    private int totalRooms;
 
     public ArrayList<Room> getBookedRooms() {
         return rooms;
@@ -46,9 +45,10 @@ public class Hotel {
         double sum = 0;
         int count = 0;
         for (int i = 0; i < rooms.size(); i++) {
-            if (rooms.get(i).getType().equals(type))
+            if (rooms.get(i).getType().equals(type)) {
                 sum += rooms.get(i).getPricePerNight();
-            count++;
+                count++;
+            }
         }
         return sum / count;
     }
